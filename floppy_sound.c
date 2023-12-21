@@ -195,7 +195,9 @@ int main(int argc, char *argv[])
   free(wav_buffer);
 
   for (i = 0; i < gExtraDataCount; ++i)
+  {
     free(gExtraData[i]);
+  }
 
   free(gExtraData);
 
