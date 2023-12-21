@@ -169,7 +169,7 @@ int main(int argc, char *argv[])
                                                 NULL);
             if (error)
             {
-              fprintf(stderr, "Could not start event monitor\n");
+              fprintf(stderr, "Could not start GPIO event monitor\n");
             }
           }
         }
