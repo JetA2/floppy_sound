@@ -15,7 +15,6 @@ endef
 
 define FLOPPY_SOUND_INSTALL_TARGET_CMDS
     $(INSTALL) -D -m 0755 $(@D)/floppy_sound $(TARGET_DIR)/usr/bin
-    $(INSTALL) -D -m 0755 $(@D)/floppy_sound.wav $(TARGET_DIR)/usr/bin
 endef
 
 $(eval $(generic-package))
