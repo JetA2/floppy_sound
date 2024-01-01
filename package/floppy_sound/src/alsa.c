@@ -13,7 +13,7 @@
 #include <time.h> // For clock_gettime
 #endif
 
-snd_pcm_t *gAudioDevice;
+snd_pcm_t *gAudioDevice = NULL;
 
 // Unit global variables
 //
@@ -377,8 +377,11 @@ bool playAudio(uint8_t *inAudioDataBuffer, uint32_t inByteCount)
 
 void closeAudioDevice()
 {
-	snd_pcm_drain(gAudioDevice);
-	snd_pcm_close(gAudioDevice);
+	if (gAudioDevice)
+	{
+		snd_pcm_drain(gAudioDevice);
+		snd_pcm_close(gAudioDevice);
+	}
 }
 
 void freeAudioDevice()
