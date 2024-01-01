@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <pthread.h>
 #include <gpiod.h>
 
@@ -78,7 +79,10 @@ void *playback_thread(void *param)
       if (!playAudio(wav_buffer + offset, byte_count))
       {
         fprintf(stderr, "Playback error");
-        pthread_exit(NULL);
+
+        // Exit process
+        //
+        exit(EXIT_FAILURE);
       }
     }
     else
