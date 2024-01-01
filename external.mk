@@ -1,0 +1,1 @@
+include $(sort $(wildcard $(BR2_EXTERNAL_FLOPPY_SOUND_PATH)/package/*/*.mk))

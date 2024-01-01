@@ -59,11 +59,12 @@ void *playback_thread(void *param)
 
   while (true)
   {
-    if (wav_offset < gCurrentSampleFormat.audioDataSize)
+    int offset = wav_offset;
+
+    if (offset < gCurrentSampleFormat.audioDataSize)
     {
       // Write one period per iteration
       //
-      int offset = wav_offset;
       int byte_count = period_byte_count;
       int overrun = (offset + byte_count) - gCurrentSampleFormat.audioDataSize;
 

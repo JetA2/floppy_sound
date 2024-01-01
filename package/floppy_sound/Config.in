@@ -1,0 +1,10 @@
+config BR2_PACKAGE_FLOPPY_SOUND
+        bool "floppy_sound"
+        select BR2_PACKAGE_ALSA_LIB
+        select BR2_PACKAGE_LIBGPIOD
+        help
+          Floppy sound emulation binary.
+
+comment "floppy_sound needs a toolchain w/ threads, atomic"
+	depends on BR2_TOOLCHAIN_HAS_THREADS
+	depends on BR2_TOOLCHAIN_HAS_ATOMIC
