@@ -10,8 +10,6 @@
 
 #define ALSA_DEVICE "default"
 
-#define WAV_FILE "floppy_sound.wav"
-
 typedef struct wav_header_
 {
   char str_riff[4]; // "RIFF"
@@ -98,9 +96,9 @@ int main(int argc, char *argv[])
 {
   // Process arguments
   //
-  if (argc < 3)
+  if (argc < 4)
   {
-    fprintf(stderr, "Usage: %s period_count period_size\n", argv[0]);
+    fprintf(stderr, "Usage: %s period_count period_size wav_file_path\n", argv[0]);
     return 0;
   }
 
@@ -118,11 +116,12 @@ int main(int argc, char *argv[])
   //
   int error = 0;
   wav_header wav_info;
+  char *wav_file_path = argv[3];
 
-  FILE *f = fopen(WAV_FILE, "rb");
+  FILE *f = fopen(wav_file_path, "rb");
   if (f == NULL)
   {
-    fprintf(stderr, "Could not open file: %s\n", WAV_FILE);
+    fprintf(stderr, "Could not open file: %s\n", wav_file_path);
     error = 1;
   }
 
