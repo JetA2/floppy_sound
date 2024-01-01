@@ -8,8 +8,6 @@
 #define GPIO_OFFSET 26
 #define GPIO_CONSUMER_NAME "floppy_sound"
 
-#define ALSA_DEVICE "default"
-
 typedef struct wav_header_
 {
   char str_riff[4]; // "RIFF"
