@@ -250,12 +250,6 @@ bool internalPlayAudio(uint8_t *inAudioDataBuffer, uint32_t inByteCount)
 #ifdef PLAYER_DEBUG
 	snd_pcm_sframes_t framesInBuffer = gBufferSizeFrames - snd_pcm_avail(gAudioDevice);
 
-	if (!framesInBuffer)
-	{
-		printf("\nBuffer empty\n");
-		fflush(stdout);
-	}
-
 	printf("\rBuffer Level: %i%% ", (int)(framesInBuffer * 100) / (int)gBufferSizeFrames);
 	fflush(stdout);
 #endif
