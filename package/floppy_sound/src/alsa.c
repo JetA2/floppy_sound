@@ -145,6 +145,12 @@ bool openAudioDevice()
 	if (result < 0)
 		fprintf(stderr, "snd_pcm_sw_params_set_start_threshold failed: %s\n", snd_strerror(result));
 
+	// Wait until buffer is empty before stopping playback
+	//
+	result = snd_pcm_sw_params_set_stop_threshold(gAudioDevice, swParams, gBufferSizeFrames);
+	if (result < 0)
+		fprintf(stderr, "snd_pcm_sw_params_set_stop_threshold failed: %s\n", snd_strerror(result));
+
 	// Write parameters
 	//
 	result = snd_pcm_sw_params(gAudioDevice, swParams);
@@ -207,6 +213,16 @@ bool openAudioDevice()
 	snd_pcm_hw_params_get_buffer_time(hwParams, &val1, &dir);
 	printf("Buffer time: %i us\n", val1);
 
+	snd_pcm_sw_params_current(gAudioDevice, swParams);
+
+	frames = 0;
+	snd_pcm_sw_params_get_start_threshold(swParams, &frames);
+	printf("Start threshold: %li frames\n", (unsigned long)frames);
+
+	frames = 0;
+	snd_pcm_sw_params_get_stop_threshold(swParams, &frames);
+	printf("Stop threshold: %li frames\n", (unsigned long)frames);
+
 #endif
 
 	return true;
@@ -232,7 +248,13 @@ void repack24BitTo32Bit(uint8_t *inAudioDataBuffer, uint32_t inByteCount, uint8_
 bool internalPlayAudio(uint8_t *inAudioDataBuffer, uint32_t inByteCount)
 {
 #ifdef PLAYER_DEBUG
-	snd_pcm_sframes_t framesInBuffer = gBufferSizeFrames - snd_pcm_avail_update(gAudioDevice);
+	snd_pcm_sframes_t framesInBuffer = gBufferSizeFrames - snd_pcm_avail(gAudioDevice);
+
+	if (!framesInBuffer)
+	{
+		printf("\nBuffer empty\n");
+		fflush(stdout);
+	}
 
 	printf("\rBuffer Level: %i%% ", (int)(framesInBuffer * 100) / (int)gBufferSizeFrames);
 	fflush(stdout);
