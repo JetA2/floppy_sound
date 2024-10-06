@@ -1,3 +1,12 @@
+/*
+ *  floppy_sound.c
+ *  floppy_sound
+ *
+ *  Created by Peter Lundkvist on 21/12/2023.
+ *  Copyright 2023 Peter Lundkvist. All rights reserved.
+ *
+ */
+
 #include <stdlib.h>
 #include <pthread.h>
 #include <gpiod.h>
