@@ -3,8 +3,9 @@
  *  floppy_sound
  *
  *  Created by Peter Lundkvist on 17/05/2009.
- *  Copyright 2009 Peter Lundkvist. All rights reserved.
  *
+ *  This is free and unencumbered software released into the public domain.
+ *  See the file COPYING for more details, or visit <http://unlicense.org>.
  */
 
 #include "common.h"
